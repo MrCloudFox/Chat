@@ -1,0 +1,11 @@
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\bin\Debug\ChatClient.exe.config
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\bin\Debug\ChatClient.exe
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\bin\Debug\ChatClient.pdb
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\obj\Debug\ChatClient.csprojResolveAssemblyReference.cache
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\obj\Debug\ChatClient.Properties.Resources.resources
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\obj\Debug\ChatClient.csproj.GenerateResource.Cache
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\obj\Debug\ChatClient.exe
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatClient\ChatClient\obj\Debug\ChatClient.pdb
+C:\Users\AlCloudFox\Desktop\Chat1\ChatClient\ChatClient\bin\Debug\ChatClient.exe.config
+C:\Users\AlCloudFox\Desktop\Chat1\ChatClient\ChatClient\obj\Debug\ChatClient.exe
+C:\Users\AlCloudFox\Desktop\Chat1\ChatClient\ChatClient\obj\Debug\ChatClient.pdb

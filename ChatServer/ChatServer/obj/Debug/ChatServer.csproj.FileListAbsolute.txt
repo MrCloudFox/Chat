@@ -1,0 +1,15 @@
+c:\users\alcloudfox\documents\visual studio 2015\Projects\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\AlCloudFox\Documents\Visual Studio 2015\Projects\ChatServer\ChatServer\bin\Debug\ChatServer.exe
+C:\Users\AlCloudFox\Documents\Visual Studio 2015\Projects\ChatServer\ChatServer\bin\Debug\ChatServer.pdb
+C:\Users\AlCloudFox\Documents\Visual Studio 2015\Projects\ChatServer\ChatServer\obj\Debug\ChatServer.csprojResolveAssemblyReference.cache
+C:\Users\AlCloudFox\Documents\Visual Studio 2015\Projects\ChatServer\ChatServer\obj\Debug\ChatServer.exe
+C:\Users\AlCloudFox\Documents\Visual Studio 2015\Projects\ChatServer\ChatServer\obj\Debug\ChatServer.pdb
+C:\Users\AlCloudFox\Desktop\Chat\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\AlCloudFox\Desktop\Chat\ChatServer\ChatServer\obj\Debug\ChatServer.exe
+C:\Users\AlCloudFox\Desktop\Chat\ChatServer\ChatServer\obj\Debug\ChatServer.pdb
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\obj\Debug\ChatServer.exe
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\obj\Debug\ChatServer.pdb
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\bin\Debug\ChatServer.exe
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\bin\Debug\ChatServer.pdb
+C:\Users\AlCloudFox\Desktop\Chat1\ChatServer\ChatServer\obj\Debug\ChatServer.csprojResolveAssemblyReference.cache
