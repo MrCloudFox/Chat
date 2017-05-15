@@ -12,8 +12,10 @@ using System.Windows.Forms;
 
 namespace ChatClient
 {
+
     public partial class FormForConnect : Form
     {
+
         public FormForConnect()
         {
             this.Size = new Size(400, 280);
@@ -91,6 +93,8 @@ namespace ChatClient
                     receiveThread.Start();
                     var formForMessages = new FormForMessages();
                     formForMessages.ShowDialog();
+
+
                 }
                 catch (Exception ex)
                 {

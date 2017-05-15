@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ChatClient
 {
@@ -9,13 +10,25 @@ namespace ChatClient
     public class MessageEventArgs : EventArgs
     {
         public string Message { get; set; }
+        public string NickName { get; set; }
 
-        public MessageEventArgs(String recieveMessage)
+        public MessageEventArgs(string nickName, string recieveMessage)
         {
+            NickName = nickName;
             Message = recieveMessage;
         }
     }
 
+
+    public class ParticipantEventArgs : EventArgs
+    {
+        public string NickNameOfParticiapant { get; set; }
+
+        public ParticipantEventArgs(string nickNameOfParticiapant)
+        {
+            NickNameOfParticiapant = nickNameOfParticiapant;
+        }
+    }
 
     class Client
     {
@@ -27,7 +40,10 @@ namespace ChatClient
         public static TcpClient ClientTcp;
         public static NetworkStream Stream;
         public delegate void MessageEventHandler(object sender, MessageEventArgs e);
+        public delegate void ParticipantEventHandler(object sender, ParticipantEventArgs e);
         public static event MessageEventHandler MessageReceived;
+        public static event ParticipantEventHandler ParticipantConnected;
+        public static event ParticipantEventHandler ParticipantDisconnected;
 
         public static void SendMessage(string message)
         {
@@ -42,9 +58,22 @@ namespace ChatClient
                 MessageReceived(this, e);
         }
 
+        protected virtual void OnParticipantConnected(ParticipantEventArgs e)
+        {
+            if (MessageReceived != null)
+                ParticipantConnected(this, e);
+        }
+
+        protected virtual void OnParticipantDisonnected(ParticipantEventArgs e)
+        {
+            if (MessageReceived != null)
+                ParticipantDisconnected(this, e);
+        }
+
         public static void ReceiveMessage()
         {
             var client = new Client();
+            //
 
             while (true)
             {
@@ -60,22 +89,32 @@ namespace ChatClient
                     }
                     while (Stream.DataAvailable);
 
-                    string message = builder.ToString();
-                    Console.WriteLine(message);
-                    client.OnMessageReceive(new MessageEventArgs(message));
-                }
-                catch
-                {
-                    Console.WriteLine("Connect is lost!");
-                    Console.ReadLine();
-                    Disconnect();
-                }
+                    string nickName = (builder.ToString()).Split(' ')[0];
+                    string message = builder.ToString().Replace(nickName, "");
+
+                    if(message == " ~Connect")
+                    {
+                        client.OnParticipantConnected(new ParticipantEventArgs(nickName.Split(':')[0]));
+                    }
+                    else if (message == " ~Disconnect")
+                    {
+                        Disconnect();
+                    }
+                    else
+                    client.OnMessageReceive(new MessageEventArgs(nickName, message));
             }
+                catch
+            {
+                //MessageBox.Show("Connect is lost!");
+                Disconnect();
+            }
+        }
         }
 
 
         public static void Disconnect()
         {
+            SendMessage(UserName + " Disconnected");
             if (Stream != null)
                 Stream.Close();
             if (ClientTcp != null)

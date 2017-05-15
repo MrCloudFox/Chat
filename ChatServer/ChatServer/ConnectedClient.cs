@@ -30,12 +30,15 @@ namespace ChatServer
             string message = GetMessage();
             userName = message;
 
-            message = "================ " + userName + " enter in the chat.================";
-
+            message = "Notification: ================ " + userName + " enter in the chat.================";
             server.BroadcastMessage(message, this.Id);
             Console.WriteLine(message);
 
-            while(true)
+
+            message = userName + ": ~Connect";
+            server.BroadcastMessage(message, this.Id);
+
+            while (true)
             {
                 try
                 {

@@ -47,7 +47,6 @@ namespace ChatServer
             byte[] data = Encoding.Unicode.GetBytes(message);
             for (int i = 0; i < clients.Count; i++)
             {
-
                     clients[i].Stream.Write(data, 0, data.Length);
             }
 
