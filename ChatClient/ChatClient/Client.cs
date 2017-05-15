@@ -98,7 +98,7 @@ namespace ChatClient
                     }
                     else if (message == " ~Disconnect")
                     {
-                        Disconnect();
+                        client.OnParticipantDisonnected(new ParticipantEventArgs(nickName.Split(':')[0]));
                     }
                     else
                     client.OnMessageReceive(new MessageEventArgs(nickName, message));
@@ -115,6 +115,7 @@ namespace ChatClient
         public static void Disconnect()
         {
             SendMessage(UserName + " Disconnected");
+
             if (Stream != null)
                 Stream.Close();
             if (ClientTcp != null)
