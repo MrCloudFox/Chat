@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace ChatServer
 {
     class ServerObject
     {
-        static TcpListener tcpListener;
-        List<ConnectedClient> clients = new List<ConnectedClient>();
+        internal static TcpListener tcpListener;
+        internal static List<ConnectedClient> clients = new List<ConnectedClient>();
+        public static List<string> listOfParticipants = new List<string>();
 
 
         protected internal void AddConnection(ConnectedClient connectedClient)
@@ -25,6 +27,8 @@ namespace ChatServer
             ConnectedClient client = clients.FirstOrDefault(c => c.Id == id);
 
             if (client != null) clients.Remove(client);
+
+            listOfParticipants.Remove(client.userName);
 
         }
 
@@ -45,12 +49,20 @@ namespace ChatServer
         protected internal void BroadcastMessage(string message, string id)
         {
             byte[] data = Encoding.Unicode.GetBytes(message);
-            for (int i = 0; i < clients.Count; i++)
+            try
             {
+                Parallel.For(0, clients.Count, i =>
+                {
                     clients[i].Stream.Write(data, 0, data.Length);
+                });
+            }
+            catch(ArgumentException e)
+            {
+                Console.WriteLine(e);
             }
 
         }
+
 
         protected internal void Disconnect()
         {

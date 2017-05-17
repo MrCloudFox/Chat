@@ -11,9 +11,9 @@ namespace ChatServer
     {
         protected internal string Id { get; private set; }
         protected internal NetworkStream Stream { get; private set; }
-        string userName;
-        TcpClient client;
-        ServerObject server;
+        internal string userName;
+        internal TcpClient client;
+        internal ServerObject server;
 
         public ConnectedClient(TcpClient tcpClient, ServerObject serverObject)
         {
@@ -30,13 +30,16 @@ namespace ChatServer
             string message = GetMessage();
             userName = message;
 
+            ServerObject.listOfParticipants.Add(userName);
+
             message = "Notification: ================ " + userName + " enter in the chat.================";
-            server.BroadcastMessage(message, this.Id);
+            server.BroadcastMessage(message, Id);
             Console.WriteLine(message);
 
+            message = userName + " ~Connect";
+            server.BroadcastMessage(message, Id);
 
-            message = userName + ": ~Connect";
-            server.BroadcastMessage(message, this.Id);
+            UpdateParticipantsList(Id, userName);
 
             while (true)
             {
@@ -45,16 +48,36 @@ namespace ChatServer
                     message = GetMessage();
                     message = String.Format("{0}: {1}", userName, message);
                     Console.WriteLine(message);
-                    server.BroadcastMessage(message, this.Id);
+                    server.BroadcastMessage(message, Id);
                 }
                 catch
                 {
                     message = String.Format(userName, "{0}: close from chat");
                     Console.WriteLine(message);
-                    server.BroadcastMessage(message, this.Id);
+                    server.BroadcastMessage(message, Id);
                     break;
                 }
             }
+        }
+
+
+        private void UpdateParticipantsList(string id, string usersName)
+        {
+            byte[] dataOfNickNameOfParticipant;
+
+            for (int i = 0; i < ServerObject.listOfParticipants.Count; i++)
+                {
+                    if (ServerObject.clients[i].Id == Id && ServerObject.clients[i].userName != usersName)
+                    {
+                        for (int j = 0; j < ServerObject.listOfParticipants.Count; j++)
+                        {
+                            dataOfNickNameOfParticipant = Encoding.Unicode.GetBytes((ServerObject.listOfParticipants[j] + ": ~Connect"));
+                            ServerObject.clients[i].Stream.Write(dataOfNickNameOfParticipant, 0, dataOfNickNameOfParticipant.Length);
+                        }
+                        break;
+                    }
+                }
+
         }
 
 
@@ -77,6 +100,8 @@ namespace ChatServer
 
         protected internal void Close()
         {
+            ServerObject.listOfParticipants.Remove(userName);
+
             if (Stream != null)
                 Stream.Close();
             if (client != null)

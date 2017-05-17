@@ -142,7 +142,6 @@ namespace ChatClient
                         break;
                     }
                 }
-                listOfParticipants.Items.Add(nickName);
             }));
 
         }
